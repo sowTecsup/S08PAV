@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class AnimatorController : MonoBehaviour
 {
     public InputSystem_Actions inputs;
+    public CharacterController controller;
 
     public Animator animator;
 
@@ -21,9 +22,10 @@ public class AnimatorController : MonoBehaviour
         inputs.Player.Movement.canceled += OnMovementFinish;
 
         inputs.Player.Jump.performed += OnJumpStart;
+        inputs.Player.Dash.performed += OnDashStart;
+        inputs.Player.StepBack.performed += OnStepBack;
     }
 
- 
 
     void Start()
     {
@@ -31,7 +33,7 @@ public class AnimatorController : MonoBehaviour
     }
     void Update()
     {
-        
+        animator.SetBool("IsGrounded", controller.IsGrounded);
     }
     private void OnMovementStart(InputAction.CallbackContext context)
     {
@@ -53,6 +55,15 @@ public class AnimatorController : MonoBehaviour
     private void OnJumpStart(InputAction.CallbackContext context)
     {
         animator.SetTrigger("OnJump");
+    }
+    private void OnDashStart(InputAction.CallbackContext context)
+    {
+        animator.SetTrigger("OnDashForward");
+    }
+
+    private void OnStepBack(InputAction.CallbackContext context)
+    {
+        animator.SetTrigger("OnStepBack");
     }
 
 }
