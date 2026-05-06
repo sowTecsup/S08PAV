@@ -2,13 +2,15 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    public abstract void TakeDamage();
-
+    public void TakeDamage();
+    // public abstract void TakeDamage();
 }
 public interface IInteractable
 {
-    public virtual void Interact()
-    {
-        Debug.Log("Interact!");
-    }
+    public void Interact();
+    
+}
+public interface ICollectable
+{
+    public void Collect();
 }
